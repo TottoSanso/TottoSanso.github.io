@@ -153,6 +153,42 @@ a { color: inherit; }
 .news-card__link { margin-top: auto; padding-top: 6px; color: var(--green); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
 .news-card__link:hover { text-decoration: underline; }
 
+.bio__facts a { color: var(--green-2); }
+
+/* ---------- Setup ---------- */
+.specs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.spec {
+  display: flex; flex-direction: column; gap: 2px; padding: 14px 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  border-left: 3px solid var(--green);
+}
+.spec__label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green-2); font-weight: 600; }
+.spec__value { font-weight: 700; }
+.spec__note { color: var(--muted); font-size: 0.85rem; }
+
+/* ---------- Carrusel ---------- */
+.carousel { --per-view: 3; position: relative; display: flex; align-items: center; gap: 12px; }
+.carousel__viewport { overflow: hidden; flex: 1; border-radius: var(--radius); }
+.carousel__track { display: flex; transition: transform .55s cubic-bezier(.22,.8,.24,1); will-change: transform; }
+.carousel__item {
+  flex: 0 0 calc(100% / var(--per-view)); margin: 0; padding: 0 6px;
+}
+.carousel__item img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #000;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  transition: border-color .18s;
+}
+.carousel__item img:hover { border-color: var(--border-strong); }
+.carousel__btn {
+  flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--surface); color: var(--green); border: 1px solid var(--border-strong); cursor: pointer;
+  transition: background .18s, box-shadow .18s, transform .18s;
+}
+.carousel__btn svg { width: 22px; height: 22px; }
+.carousel__btn:hover { background: var(--green); color: #031000; box-shadow: 0 0 20px var(--green-glow); }
+.carousel__btn:active { transform: scale(.94); }
+.carousel__btn:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
 /* ---------- Footer ---------- */
 .footer {
   margin-top: 24px; padding-top: 40px; padding-bottom: 40px;
@@ -162,6 +198,7 @@ a { color: inherit; }
 .footer img { border-radius: 50%; }
 .footer p { margin: 0; color: var(--muted); }
 .footer small { color: #5f6a63; }
+.copyright { font-size: 0.78rem; line-height: 1.6; max-width: 520px; }
 
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
@@ -172,6 +209,8 @@ a { color: inherit; }
   .avatar { width: 112px; height: 112px; }
   .bio { grid-template-columns: 1fr; }
   .links { grid-template-columns: 1fr; }
+  .carousel { --per-view: 1; gap: 8px; }
+  .carousel__btn { width: 38px; height: 38px; }
   .section { padding: 32px 16px; }
 }
 

@@ -20,6 +20,10 @@ Editá `news.json` y sumá un objeto al principio de la lista:
 ## Cambiar links, horario o estado "en vivo"
 Todo está arriba de `main.js`, en `CONFIG` y `LINKS`.
 
+## Componentes de la PC y galería
+También arriba de `main.js`: `SPECS` (setup) y `GALLERY` (imágenes del carrusel).
+Para sumar fotos al carrusel, ponelas en `assets/galeria/` y agregá `{ src: "assets/galeria/foto.jpg", alt: "descripción" }`.
+
 ## Probar en local
 `news.json` se carga con fetch, así que hace falta un servidor:
 ```

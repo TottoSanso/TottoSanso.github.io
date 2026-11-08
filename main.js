@@ -17,6 +17,26 @@ const LINKS = [
   { name: "Instagram", handle: "@tottosanso", url: "https://www.instagram.com/tottosanso", icon: "instagram" },
   { name: "YouTube", handle: "@tottosanso", url: "https://www.youtube.com/@tottosanso", icon: "youtube" },
 ];
+// Componentes de la PC (label = qué es, value = modelo)
+const SPECS = [
+  { label: "Procesador", value: "AMD Ryzen 7 5800X", note: "8 núcleos / 16 hilos" },
+  { label: "Placa de video", value: "AMD Radeon RX 6650 XT", note: "8 GB GDDR6" },
+  { label: "Memoria RAM", value: "32 GB G.Skill Trident Z RGB", note: "DDR4 3200 MHz CL16 · 4×8 GB" },
+  { label: "Motherboard", value: "ASUS TUF Gaming B550-Plus", note: "AM4" },
+  { label: "Almacenamiento", value: "WD_BLACK SN850X 1 TB", note: "NVMe + HDD Toshiba 1 TB" },
+  { label: "Monitor principal", value: "Samsung Odyssey G7 28\"", note: "4K 144 Hz" },
+  { label: "Monitor secundario", value: "Philips 241V8 24\"", note: "Full HD" },
+  { label: "Captura", value: "Elgato 4K X", note: "Para la Xbox" },
+  { label: "Consola", value: "Xbox Series X", note: "" },
+];
+
+// Galería: agregá imágenes en assets/galeria/ y sumalas acá
+const GALLERY = [
+  { src: "assets/banner.jpg", alt: "Banner del canal TottoSanso228" },
+  { src: "assets/avatar.jpg", alt: "Logo de TottoSanso228" },
+  { src: "assets/wordmark.png", alt: "Wordmark TottoSanso 228" },
+];
+const GALLERY_AUTOPLAY_MS = 4000;
 // ==========================================
 
 const $ = (sel) => document.querySelector(sel);
@@ -106,7 +126,77 @@ function observeReveal() {
   els.forEach((el) => io.observe(el));
 }
 
+function renderSpecs() {
+  $("#specs-grid").innerHTML = SPECS.map((s) => `
+    <div class="spec reveal">
+      <span class="spec__label">${esc(s.label)}</span>
+      <span class="spec__value">${esc(s.value)}</span>
+      ${s.note ? `<span class="spec__note">${esc(s.note)}</span>` : ""}
+    </div>`).join("");
+}
+
+// Carrusel infinito: 3 visibles en desktop, 1 en celular. Avanza de a una.
+function initCarousel() {
+  const root = $("#carousel");
+  const track = $("#carousel-track");
+  const n = GALLERY.length;
+  if (!n) { $("#galeria").hidden = true; return; }
+
+  const slide = (g) => `<figure class="carousel__item"><img src="${esc(g.src)}" alt="${esc(g.alt)}" loading="lazy"></figure>`;
+  // 3 copias para poder girar sin fin en ambos sentidos
+  track.innerHTML = [...GALLERY, ...GALLERY, ...GALLERY].map(slide).join("");
+
+  let index = n;
+  let busy = false;
+  const perView = () => parseInt(getComputedStyle(root).getPropertyValue("--per-view")) || 3;
+  const move = (animate) => {
+    track.style.transition = animate ? "" : "none";
+    track.style.transform = `translateX(-${(index * 100) / perView()}%)`;
+  };
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const settle = () => {
+    if (index >= 2 * n) index -= n;
+    if (index < n) index += n;
+    move(false);
+    busy = false;
+  };
+  const go = (dir) => {
+    if (busy) return;
+    busy = true;
+    index += dir;
+    move(true);
+    if (reduce) settle(); // sin animación no hay transitionend
+  };
+  track.addEventListener("transitionend", (e) => { if (e.target === track) settle(); });
+
+  root.querySelector(".carousel__btn--prev").addEventListener("click", () => { go(-1); restart(); });
+  root.querySelector(".carousel__btn--next").addEventListener("click", () => { go(1); restart(); });
+  window.addEventListener("resize", () => move(false));
+
+  let timer;
+  const start = () => { if (!reduce && GALLERY_AUTOPLAY_MS) timer = setInterval(() => { if (!document.hidden) go(1); }, GALLERY_AUTOPLAY_MS); };
+  const stop = () => clearInterval(timer);
+  const restart = () => { stop(); start(); };
+  root.addEventListener("mouseenter", stop);
+  root.addEventListener("mouseleave", start);
+
+  // swipe en celular
+  let x0 = null;
+  root.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+  root.addEventListener("touchend", (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    x0 = null; start();
+  });
+
+  move(false);
+  start();
+}
+
 renderLinks();
+renderSpecs();
+initCarousel();
 renderStatus();
 renderCountdown();
 observeReveal();
