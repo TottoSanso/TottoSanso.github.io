@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2026-11-08",
+    "title": "¡Arranca la web oficial!",
+    "body": "Ahora tenés todo en un solo lugar: links a mis streams, redes, Discord y todas las novedades del canal.",
+    "image": "assets/banner.jpg"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "Cuenta regresiva para GTA 6",
+    "body": "El 19 de noviembre llega GTA 6 y lo vamos a jugar en vivo desde el día uno. Sumate al Discord para enterarte del horario del stream de lanzamiento.",
+    "link": "https://discord.gg/g5gWxjDKUr",
+    "linkText": "Unirme al Discord"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Multistream: Twitch, Kick y Starvios",
+    "body": "Cada stream sale en simultáneo en las tres plataformas. Elegí la que más te guste, el chat es el mismo espíritu.",
+    "link": "https://www.twitch.tv/tottosanso228",
+    "linkText": "Ir a Twitch"
+  }
+]

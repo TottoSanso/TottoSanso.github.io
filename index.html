@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TottoSanso228 · Streams y comunidad</title>
+  <meta name="description" content="TottoSanso228: streams de GTA, LoL, ARC Raiders y Warzone. Links a Twitch, Kick, Discord y todas mis redes. Play · Improve · Enjoy.">
+  <meta name="theme-color" content="#07090A">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TottoSanso228 · Streams y comunidad">
+  <meta property="og:description" content="Play · Improve · Enjoy. Twitch, Kick, Discord y todas mis redes en un solo lugar.">
+  <meta property="og:image" content="assets/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__inner container">
+      <div class="avatar">
+        <div class="avatar__crop"><img src="assets/avatar.jpg" alt="Totto Sanso" width="256" height="256"></div>
+      </div>
+      <h1 class="visually-hidden">TottoSanso228</h1>
+      <img class="wordmark" src="assets/wordmark.png" alt="TottoSanso 228" width="900" height="325">
+      <p class="tagline">Play <span>·</span> Improve <span>·</span> Enjoy</p>
+      <div class="hero__meta">
+        <a class="status" id="status" href="#" target="_blank" rel="noopener">
+          <span class="status__dot"></span><span id="status-text">Offline</span>
+        </a>
+        <span class="countdown" id="countdown" hidden></span>
+      </div>
+      <a class="btn btn--primary" id="discord-cta" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-discord"/></svg>
+        Unite a la comunidad
+      </a>
+      <a class="btn btn--ghost" id="stream-cta" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-twitch"/></svg>
+        Pasate por el stream a saludar 👋
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container" id="links" aria-labelledby="links-title">
+      <h2 class="section__title" id="links-title">Dónde encontrarme</h2>
+      <div class="links" id="links-grid"></div>
+    </section>
+
+    <section class="section container" id="bio" aria-labelledby="bio-title">
+      <h2 class="section__title" id="bio-title">Sobre mí</h2>
+      <div class="bio">
+        <div class="bio__text">
+          <p>¡Buenas! Soy <strong>Totto Sanso</strong>, streamer argentino. Hago streams en español donde la idea es simple: <strong>jugar, mejorar y pasarla bien</strong> con la comunidad.</p>
+          <p>Me vas a encontrar rankeando en <strong>League of Legends (EUW)</strong>, sobreviviendo en <strong>ARC Raiders</strong>, en partidas de <strong>Warzone</strong> y preparando todo para la llegada de <strong>GTA 6</strong>.</p>
+          <p>Transmito en simultáneo por Twitch, Kick y Starvios: elegí tu plataforma y sumate al chat.</p>
+        </div>
+        <dl class="bio__facts">
+          <div><dt>Juegos</dt><dd>LoL · ARC Raiders · Warzone · GTA 6</dd></div>
+          <div><dt>Setup</dt><dd>PC + Xbox Series X</dd></div>
+          <div><dt>Idioma</dt><dd>Español</dd></div>
+          <div><dt>Horario</dt><dd id="schedule">A confirmar</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section container" id="news" aria-labelledby="news-title">
+      <h2 class="section__title" id="news-title">News</h2>
+      <div class="news" id="news-list"><p class="muted">Cargando novedades…</p></div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <img src="assets/favicon.png" alt="" width="40" height="40">
+    <p>¿Te copaste? Sumate al Discord y enterate primero de cada stream.</p>
+    <a class="btn btn--ghost" id="discord-footer" href="#" target="_blank" rel="noopener">Entrar al Discord</a>
+    <small>© <span id="year"></span> TottoSanso228</small>
+  </footer>
+
+  <!-- Iconos -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-twitch" viewBox="0 0 24 24"><path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></symbol>
+    <symbol id="i-kick" viewBox="0 0 24 24"><path fill="currentColor" d="M3 2h6v6h2V6h2V4h2V2h6v7h-2v2h-2v2h2v2h2v7h-6v-2h-2v-2h-2v-2H9v6H3z"/></symbol>
+    <symbol id="i-starvios" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.6l-6.4 3.5L7 14l-5.3-5 7.2-.9z"/></symbol>
+    <symbol id="i-discord" viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+    <symbol id="i-threads" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M17.5 8.2C16.6 5.3 14.6 3.5 12 3.5 7.6 3.5 5 7 5 12s2.6 8.5 7 8.5c3.6 0 6-2 6-4.8 0-2.6-2.2-4-5.4-4-2.4 0-3.9 1.1-3.9 2.6 0 1.4 1.2 2.3 2.9 2.3 2.6 0 3.9-2 3.9-5.4"/></g></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></symbol>
+  </svg>
+
+  <script src="main.js"></script>
+</body>
+</html>
