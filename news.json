@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-11-10",
+    "title": "FSR 4 en consolas: la PS5 Pro escala en 4K casi el doble de rápido que la Series X",
+    "body": "En 4K, la PS5 Pro con PSSR 2.0 reescala un frame en 2 ms. La Series X tarda 3,86 ms con FSR 4 (2,75 con Lite) y la PS5 base 4,4 ms, porque sin INT8 solo puede usar FSR 4 Lite en FP16. La Series S apunta a 1440p y 1080p. Xbox: datos oficiales de Microsoft. PS5: comparativas de GamerBits y GameGPU.",
+    "image": "assets/news/fsr4-consolas.png",
+    "link": "https://developer.microsoft.com/en-us/games/articles/2026/11/amd-fsr-upscaling-4-is-now-available-for-xbox/",
+    "linkText": "Fuente oficial de Microsoft"
+  },
+  {
     "date": "2026-11-08",
     "title": "¡Arranca la web oficial!",
     "body": "Ahora tenés todo en un solo lugar: links a mis streams, redes, Discord y todas las novedades del canal.",
