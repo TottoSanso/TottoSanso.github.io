@@ -15,7 +15,7 @@ const LINKS = [
   { name: "TikTok", handle: "@tottosanso", url: "https://www.tiktok.com/@tottosanso", icon: "tiktok" },
   { name: "Threads", handle: "@tottosanso", url: "https://www.threads.net/@tottosanso", icon: "threads" },
   { name: "X", handle: "@TottoSanso228", url: "https://x.com/TottoSanso228", icon: "x" },
-  { name: "Instagram", handle: "@tottosanso", url: "https://www.instagram.com/tottosanso", icon: "instagram" },
+  { name: "Instagram", handle: "@tottosanso.tv", url: "https://www.instagram.com/tottosanso.tv/", icon: "instagram" },
   { name: "YouTube", handle: "@tottosanso", url: "https://www.youtube.com/@tottosanso", icon: "youtube" },
 ];
 // Componentes de la PC (label = qué es, value = modelo)
