@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-11-19",
+    "title": "Salió GTA 6 y le metimos hasta las 6:30 am",
+    "body": "Lo esperamos en stream hasta las 00 y después ya no hubo forma de parar. Fueron 13 años de espera y valió la pena: se siente el motor gráfico de RDR2 pero con el mundo de GTA, y el nivel de detalle de los NPC es una cosa de locos. Cuando vi salir el sol dije bueno, ya es hora de ir a dormir. Lo seguimos jugando en los próximos streams, ¿te sumás?",
+    "image": "assets/news/gta6-lanzamiento.jpg",
+    "link": "https://www.twitch.tv/tottosanso228",
+    "linkText": "Ir a Twitch"
+  },
+  {
     "date": "2026-11-10",
     "title": "FSR 4 en consolas: la PS5 Pro escala en 4K casi el doble de rápido que la Series X",
     "body": "En 4K, la PS5 Pro con PSSR 2.0 reescala un frame en 2 ms. La Series X tarda 3,86 ms con FSR 4 (2,75 con Lite) y la PS5 base 4,4 ms, porque sin INT8 solo puede usar FSR 4 Lite en FP16. La Series S apunta a 1440p y 1080p. Xbox: datos oficiales de Microsoft. PS5: comparativas de GamerBits y GameGPU.",
@@ -12,13 +20,6 @@
     "title": "¡Arranca la web oficial!",
     "body": "Ahora tenés todo en un solo lugar: links a mis streams, redes, Discord y todas las novedades del canal.",
     "image": "assets/banner.jpg"
-  },
-  {
-    "date": "2026-11-07",
-    "title": "Cuenta regresiva para GTA 6",
-    "body": "El 19 de noviembre llega GTA 6 y lo vamos a jugar en vivo desde el día uno. Sumate al Discord para enterarte del horario del stream de lanzamiento.",
-    "link": "https://discord.gg/g5gWxjDKUr",
-    "linkText": "Unirme al Discord"
   },
   {
     "date": "2026-11-05",

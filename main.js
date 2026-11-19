@@ -1,9 +1,11 @@
 // ============ CONFIG: editá acá ============
 const CONFIG = {
-  live: false,                                   // true cuando estés en vivo
+  live: false,                                   // se detecta solo con Twitch (ver checkLive); esto es solo el valor inicial
+  twitchUser: "tottosanso228",
   liveUrl: "https://www.twitch.tv/tottosanso228",
   schedule: "A confirmar",                       // ej: "Lun a Vie · 21:00 (ARG)"
-  countdown: { label: "GTA 6", date: "2026-11-19T00:00:00" }, // poné null para ocultarlo
+  badge: "Jugando GTA 6 🔥",                     // cartelito al lado del estado; poné null para ocultarlo
+  countdown: null,                               // ej: { label: "GTA 7", date: "2039-01-01T00:00:00" }
   discord: "https://discord.gg/g5gWxjDKUr",
 };
 
@@ -33,9 +35,13 @@ const SPECS = [
 
 // Galería: agregá imágenes en assets/galeria/ y sumalas acá
 const GALLERY = [
+  { src: "assets/galeria/gta6-3.jpg", alt: "GTA 6 en stream: atardecer manejando por un puente" },
+  { src: "assets/galeria/gta6-1.jpg", alt: "GTA 6 en stream: en lancha por los pantanos" },
+  { src: "assets/galeria/gta6-2.jpg", alt: "GTA 6 en stream: camioneta roja en Vice City" },
+  { src: "assets/galeria/gta6-4.jpg", alt: "GTA 6 en stream: en moto por la ruta" },
+  { src: "assets/galeria/gta6-5.jpg", alt: "GTA 6 en stream: puesto de flores" },
+  { src: "assets/galeria/gta6-6.jpg", alt: "GTA 6 en stream: misión de noche" },
   { src: "assets/banner.jpg", alt: "Banner del canal TottoSanso228" },
-  { src: "assets/avatar.jpg", alt: "Logo de TottoSanso228" },
-  { src: "assets/wordmark.png", alt: "Wordmark TottoSanso 228" },
 ];
 const GALLERY_AUTOPLAY_MS = 4000;
 // ==========================================
@@ -56,15 +62,28 @@ function renderLinks() {
     </a>`).join("");
 }
 
-function renderStatus() {
+function setLive(live) {
   const s = $("#status");
-  s.href = CONFIG.liveUrl;
-  if (CONFIG.live) {
-    s.classList.add("is-live");
-    $("#status-text").textContent = "En vivo ahora";
-  } else {
-    $("#status-text").textContent = "Offline · seguime para enterarte";
-  }
+  s.classList.toggle("is-live", live);
+  $("#status-text").textContent = live ? "En vivo ahora" : "Offline · seguime para enterarte";
+}
+
+// Pregunta a decapi.me (gratis, sin claves) si el canal de Twitch está en vivo.
+// Responde "<canal> is offline" o el tiempo en vivo ("1 hour, 5 minutes").
+async function checkLive() {
+  try {
+    const res = await fetch(`https://decapi.me/twitch/uptime/${CONFIG.twitchUser}`, { cache: "no-store" });
+    const txt = (await res.text()).trim();
+    if (!res.ok || !txt) return;
+    setLive(!/offline|error|not found|invalid|rate/i.test(txt));
+  } catch (e) { /* sin conexión: queda como estaba */ }
+}
+
+function renderStatus() {
+  $("#status").href = CONFIG.liveUrl;
+  setLive(CONFIG.live);
+  checkLive();
+  setInterval(() => { if (!document.hidden) checkLive(); }, 120_000);
   $("#discord-cta").href = CONFIG.discord;
   $("#stream-cta").href = CONFIG.liveUrl;
   $("#discord-footer").href = CONFIG.discord;
@@ -75,7 +94,10 @@ function renderStatus() {
 function renderCountdown() {
   const c = CONFIG.countdown;
   const el = $("#countdown");
-  if (!c) return;
+  if (!c) {
+    if (CONFIG.badge) { el.textContent = CONFIG.badge; el.hidden = false; }
+    return;
+  }
   const target = new Date(c.date).getTime();
   const tick = () => {
     const ms = target - Date.now();

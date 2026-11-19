@@ -174,7 +174,7 @@ a { color: inherit; }
   flex: 0 0 calc(100% / var(--per-view)); margin: 0; padding: 0 6px;
 }
 .carousel__item img {
-  width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #000;
+  width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000;
   border: 1px solid var(--border); border-radius: var(--radius);
   transition: border-color .18s;
 }
