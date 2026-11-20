@@ -52,7 +52,7 @@ const icon = (id, cls = "") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hid
 
 function renderLinks() {
   $("#links-grid").innerHTML = LINKS.map((l) => `
-    <a class="link reveal${l.featured ? " link--featured" : ""}" href="${esc(l.url)}" target="_blank" rel="noopener">
+    <a class="link reveal${l.featured ? " link--featured" : ""}" href="${esc(l.url)}" data-umami-event="clic-red" data-umami-event-red="${esc(l.name)}" target="_blank" rel="noopener">
       <span class="link__icon">${icon(l.icon)}</span>
       <span class="link__body">
         <span class="link__name">${esc(l.name)}</span>
@@ -130,7 +130,7 @@ async function renderNews() {
           <time datetime="${esc(n.date)}">${esc(fmtDate(n.date))}</time>
           <h3>${esc(n.title)}</h3>
           <p>${esc(n.body)}</p>
-          ${n.link ? `<a class="news-card__link" href="${esc(n.link)}" target="_blank" rel="noopener">${esc(n.linkText || "Ver más")} →</a>` : ""}
+          ${n.link ? `<a class="news-card__link" data-umami-event="clic-novedad" data-umami-event-titulo="${esc(n.title)}" href="${esc(n.link)}" target="_blank" rel="noopener">${esc(n.linkText || "Ver más")} →</a>` : ""}
         </div>
       </article>`).join("");
     observeReveal();

@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=4">
+  <!-- Umami: visitas sin cookies (panel en cloud.umami.is) -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="a67df92c-7508-41d3-9209-69644b2bcb63"></script>
 </head>
 <body>
   <header class="hero">
@@ -31,16 +33,16 @@
       <img class="wordmark" src="assets/wordmark.png" alt="TottoSanso 228" width="900" height="325">
       <p class="tagline">Play <span>·</span> Improve <span>·</span> Enjoy</p>
       <div class="hero__meta">
-        <a class="status" id="status" href="#" target="_blank" rel="noopener">
+        <a class="status" id="status" data-umami-event="clic-estado-vivo" href="#" target="_blank" rel="noopener">
           <span class="status__dot"></span><span id="status-text">Offline</span>
         </a>
         <span class="countdown" id="countdown" hidden></span>
       </div>
-      <a class="btn btn--primary" id="discord-cta" href="#" target="_blank" rel="noopener">
+      <a class="btn btn--primary" id="discord-cta" data-umami-event="clic-discord-arriba" href="#" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-discord"/></svg>
         Unite a la comunidad
       </a>
-      <a class="btn btn--ghost" id="stream-cta" href="#" target="_blank" rel="noopener">
+      <a class="btn btn--ghost" id="stream-cta" data-umami-event="clic-ver-stream" href="#" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-twitch"/></svg>
         Pasate por el stream a saludar 👋
       </a>
@@ -99,7 +101,7 @@
   <footer class="footer container">
     <img src="assets/favicon.png" alt="" width="40" height="40">
     <p>¿Te copaste? Sumate al Discord y enterate primero de cada stream.</p>
-    <a class="btn btn--ghost" id="discord-footer" href="#" target="_blank" rel="noopener">Entrar al Discord</a>
+    <a class="btn btn--ghost" id="discord-footer" data-umami-event="clic-discord-abajo" href="#" target="_blank" rel="noopener">Entrar al Discord</a>
     <small class="copyright">
       © <span id="year"></span> TottoSanso228 · Todos los derechos reservados.<br>
       El logo, las imágenes y el contenido de esta página son propiedad de TottoSanso228 y no pueden reproducirse sin autorización.
@@ -120,6 +122,6 @@
     <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></symbol>
   </svg>
 
-  <script src="main.js?v=4"></script>
+  <script src="main.js?v=5"></script>
 </body>
 </html>
