@@ -123,20 +123,82 @@ async function renderNews() {
     if (!res.ok) throw new Error(res.status);
     const items = (await res.json()).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
     if (!items.length) { box.innerHTML = `<p class="muted">Todavía no hay novedades.</p>`; return; }
-    box.innerHTML = items.map((n) => `
+    // "images": [...] = carrusel (se ve la portada + miniaturas); "image" = una sola foto
+    const photos = (n) => (n.images?.length ? n.images : n.image ? [n.image] : []);
+    box.innerHTML = items.map((n, i) => {
+      const imgs = photos(n);
+      const multi = imgs.length > 1;
+      return `
       <article class="news-card reveal">
-        ${n.image ? `<img class="news-card__img" src="${esc(n.image)}" alt="" loading="lazy">` : ""}
+        ${imgs.length ? `
+        <button class="news-card__media" type="button" data-news="${i}" data-idx="0" aria-label="Ver ${multi ? `las ${imgs.length} imágenes` : "la imagen"} en grande">
+          <img class="news-card__img${multi ? " news-card__img--tall" : ""}" src="${esc(imgs[0])}" alt="" loading="lazy">
+          ${multi ? `<span class="news-card__count">📷 ${imgs.length}</span>` : ""}
+        </button>` : ""}
+        ${multi ? `<div class="news-card__thumbs">${imgs.map((src, k) => `
+          <button type="button" data-news="${i}" data-idx="${k}" aria-label="Ver imagen ${k + 1} de ${imgs.length}"><img src="${esc(src)}" alt="" loading="lazy"></button>`).join("")}
+        </div>` : ""}
         <div class="news-card__body">
           <time datetime="${esc(n.date)}">${esc(fmtDate(n.date))}</time>
           <h3>${esc(n.title)}</h3>
           <p>${esc(n.body)}</p>
           ${n.link ? `<a class="news-card__link" data-umami-event="clic-novedad" data-umami-event-titulo="${esc(n.title)}" href="${esc(n.link)}" target="_blank" rel="noopener">${esc(n.linkText || "Ver más")} →</a>` : ""}
         </div>
-      </article>`).join("");
+      </article>`;
+    }).join("");
+    box.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-news]");
+      if (!b) return;
+      const n = items[+b.dataset.news];
+      openLightbox(photos(n), +b.dataset.idx, n.title);
+      window.umami?.track("ver-imagen-novedad", { titulo: n.title });
+    });
     observeReveal();
   } catch (e) {
     box.innerHTML = `<p class="muted">No se pudieron cargar las novedades. Pasate por el Discord.</p>`;
   }
+}
+
+// ---------- Visor de imágenes ----------
+const LB = { list: [], i: 0, title: "" };
+function showLightbox() {
+  const { list, i } = LB;
+  $("#lightbox-img").src = list[i];
+  $("#lightbox-img").alt = LB.title ? `${LB.title} (${i + 1} de ${list.length})` : "";
+  $("#lightbox-title").textContent = LB.title;
+  $("#lightbox-count").textContent = list.length > 1 ? `${i + 1} / ${list.length}` : "";
+  document.querySelectorAll(".lightbox__nav").forEach((b) => { b.hidden = list.length < 2; });
+  [list[i + 1], list[i - 1]].forEach((src) => { if (src) new Image().src = src; }); // precarga vecinas
+}
+function stepLightbox(d) {
+  if (LB.list.length < 2) return;
+  LB.i = (LB.i + d + LB.list.length) % LB.list.length;
+  showLightbox();
+}
+function openLightbox(list, i = 0, title = "") {
+  Object.assign(LB, { list, i, title });
+  showLightbox();
+  const dlg = $("#lightbox");
+  if (!dlg.open) dlg.showModal();
+}
+function initLightbox() {
+  const dlg = $("#lightbox");
+  dlg.querySelector(".lightbox__close").addEventListener("click", () => dlg.close());
+  dlg.querySelector(".lightbox__nav--prev").addEventListener("click", () => stepLightbox(-1));
+  dlg.querySelector(".lightbox__nav--next").addEventListener("click", () => stepLightbox(1));
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // clic en el fondo
+  dlg.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") stepLightbox(1);
+    if (e.key === "ArrowLeft") stepLightbox(-1);
+  });
+  let x0 = null;
+  dlg.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  dlg.addEventListener("touchend", (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) stepLightbox(dx < 0 ? 1 : -1);
+    x0 = null;
+  });
 }
 
 let io;
@@ -191,6 +253,13 @@ function initCarousel() {
     if (reduce) settle(); // sin animación no hay transitionend
   };
   track.addEventListener("transitionend", (e) => { if (e.target === track) settle(); });
+  // clic en una foto de la galería: se abre en grande
+  track.addEventListener("click", (e) => {
+    const fig = e.target.closest(".carousel__item");
+    if (!fig) return;
+    const k = [...track.children].indexOf(fig) % n;
+    openLightbox(GALLERY.map((g) => g.src), k, "Galería");
+  });
 
   root.querySelector(".carousel__btn--prev").addEventListener("click", () => { go(-1); restart(); });
   root.querySelector(".carousel__btn--next").addEventListener("click", () => { go(1); restart(); });
@@ -219,6 +288,7 @@ function initCarousel() {
 
 renderLinks();
 renderSpecs();
+initLightbox();
 initCarousel();
 renderStatus();
 renderCountdown();

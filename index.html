@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
   <!-- Umami: visitas sin cookies (panel en cloud.umami.is) -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="a67df92c-7508-41d3-9209-69644b2bcb63"></script>
 </head>
@@ -98,6 +98,17 @@
     </section>
   </main>
 
+  <!-- Visor de imágenes (news y galería) -->
+  <dialog class="lightbox" id="lightbox" aria-label="Visor de imágenes">
+    <button class="lightbox__close" type="button" aria-label="Cerrar">✕</button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Anterior">‹</button>
+    <figure class="lightbox__fig">
+      <img id="lightbox-img" alt="">
+      <figcaption><span id="lightbox-title"></span><span id="lightbox-count"></span></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Siguiente">›</button>
+  </dialog>
+
   <footer class="footer container">
     <img src="assets/favicon.png" alt="" width="40" height="40">
     <p>¿Te copaste? Sumate al Discord y enterate primero de cada stream.</p>
@@ -122,6 +133,6 @@
     <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></symbol>
   </svg>
 
-  <script src="main.js?v=5"></script>
+  <script src="main.js?v=6"></script>
 </body>
 </html>
